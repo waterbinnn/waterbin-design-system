@@ -1,7 +1,7 @@
 {
   "name": "@waterbin/design-system",
   "description": "waterbin's design system",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "license": "MIT",
   "module": "dist/index.js",
   "type": "module",
@@ -11,23 +11,32 @@
   ],
   "scripts": {
     "dev": "next dev",
-    "build": "rollup -c",
+    "build": "tsc --emitDeclarationOnly & rollup -c",
     "start": "next start",
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "build:types": "tsc --emitDeclarationOnly"
+    "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^26.0.1",
+    "@rollup/plugin-image": "^3.0.3",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@rollup/plugin-url": "^8.0.2",
     "@swc/plugin-styled-components": "^2.0.11",
     "@types/styled-components": "^5.1.34",
     "next": "14.0.4",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.36.0",
     "styled-components": "^6.1.12",
     "styled-reset": "^4.5.2"
   },
   "peerDependencies": {
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "styled-components": "^6.1.12"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.6.1",
@@ -48,11 +57,6 @@
     "eslint-config-next": "14.0.4",
     "eslint-plugin-storybook": "^0.8.0",
     "rollup": "^4.20.0",
-    "rollup-plugin-babel": "^4.4.0",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-peer-deps-external": "^2.2.4",
-    "rollup-plugin-url": "^3.0.1",
     "storybook": "^8.2.7",
     "typescript": "^5"
   }
