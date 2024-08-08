@@ -1,7 +1,7 @@
 {
   "name": "@waterbin/design-system",
   "description": "waterbin's design system",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "license": "MIT",
   "module": "dist/index.js",
   "type": "module",
