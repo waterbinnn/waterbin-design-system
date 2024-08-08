@@ -18,7 +18,6 @@ import { terser } from 'rollup-plugin-terser';
 const extensions = ['.js', '.jsx', '.ts', '.tsx']; // 어떤 확장자를 처리 할 지 정함
 const external = ['react', 'react-dom', 'styled-components'];
 
-// babel-preset-react-app를 사용한다면 BABEL_ENV를 필수로 설정해야함.
 process.env.BABEL_ENV = 'production';
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -39,6 +38,8 @@ export default {
       include: ['src/**/*'],
       babelHelpers: 'runtime',
       skipPreflightCheck: true,
+      presets: ['next/babel'],
+      plugins: [['styled-components', { ssr: true }]],
     }), // Babel을 사용 할 수 있게 해줌
     url(), // 미디어 파일을 dataURI 형태로 불러와서 사용 할 수 있게 해줌.
     svgr(), // SVG를 컴포넌트로 사용 할 수 있게 해줌.
