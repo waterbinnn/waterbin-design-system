@@ -1,8 +1,9 @@
 {
   "name": "@waterbin/design-system",
   "description": "waterbin's design system",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "license": "MIT",
+  "type": "module",
   "module": "dist/index.js",
   "types": "dist/types/index.d.ts",
   "files": [
@@ -10,7 +11,7 @@
   ],
   "scripts": {
     "dev": "next dev",
-    "build": "tsc --emitDeclarationOnly & rollup -c",
+    "build": "tsc --emitDeclarationOnly && rollup -c",
     "start": "next start",
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
@@ -22,6 +23,7 @@
     "@rollup/plugin-commonjs": "^26.0.1",
     "@rollup/plugin-image": "^3.0.3",
     "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.6",
     "@rollup/plugin-url": "^8.0.2",
     "@svgr/webpack": "^8.1.0",
     "@swc/plugin-styled-components": "^2.0.11",
@@ -29,6 +31,8 @@
     "next": "14.0.4",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript": "^1.0.1",
+    "rollup-plugin-typescript2": "^0.36.0",
     "styled-components": "^6.1.12",
     "styled-reset": "^4.5.2"
   },
