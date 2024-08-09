@@ -14,5 +14,12 @@ const config: StorybookConfig = {
     options: {},
   },
   staticDirs: ['../public'],
+  webpack: (config) => {
+    config.module?.rules?.unshift({
+      test: /\.svg$/,
+      use: ['@svgr/webpack'],
+    });
+    return config;
+  },
 };
 export default config;

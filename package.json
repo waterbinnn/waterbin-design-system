@@ -4,7 +4,6 @@
   "version": "0.2.2",
   "license": "MIT",
   "module": "dist/index.js",
-  "type": "module",
   "types": "dist/types/index.d.ts",
   "files": [
     "/dist"
@@ -24,6 +23,7 @@
     "@rollup/plugin-image": "^3.0.3",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-url": "^8.0.2",
+    "@svgr/webpack": "^8.1.0",
     "@swc/plugin-styled-components": "^2.0.11",
     "@types/styled-components": "^5.1.34",
     "next": "14.0.4",
@@ -49,7 +49,7 @@
     "@storybook/test": "^8.2.7",
     "@svgr/rollup": "^8.1.0",
     "@types/node": "^20",
-    "@types/react": "^18",
+    "@types/react": "18.2.68",
     "@types/react-dom": "^18",
     "babel-plugin-styled-components": "^2.1.4",
     "eslint": "^8",
