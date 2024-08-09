@@ -1,12 +1,11 @@
 import { DefaultTheme } from 'styled-components';
-
-const color = {
-  black: '#000000',
-  blue: '#0a84ff',
-};
+import { color, fontFamily, fontMain, fontPrice } from './constants';
 
 const theme: DefaultTheme = {
   color,
+  fontFamily,
+  fontMain,
+  fontPrice,
 };
 
 export default theme;
