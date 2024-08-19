@@ -10,10 +10,11 @@ import babel from '@rollup/plugin-babel';
 import pkg from './package.json' assert { type: 'json' };
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import svgr from '@svgr/rollup';
-import url from '@rollup/plugin-url';
+import url from 'rollup-plugin-url';
 import alias from '@rollup/plugin-alias';
 import image from '@rollup/plugin-image';
 import { terser } from 'rollup-plugin-terser';
+import typescript from '@rollup/plugin-typescript';
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx']; // 어떤 확장자를 처리 할 지 정함
 const external = ['react', 'react-dom', 'styled-components'];
@@ -41,12 +42,11 @@ export default {
       presets: ['next/babel'],
       plugins: [['styled-components', { ssr: true }]],
     }), // Babel을 사용 할 수 있게 해줌
-    url(), // 미디어 파일을 dataURI 형태로 불러와서 사용 할 수 있게 해줌.
+    url(),
     svgr(), // SVG를 컴포넌트로 사용 할 수 있게 해줌.
-    // typescript({
-    //   useTsconfigDeclarationDir: true,
-    // }),
-    image(),
+    typescript({
+      tsconfig: 'tsconfig.json',
+    }),
     terser(),
   ],
   output: [

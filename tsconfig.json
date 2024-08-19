@@ -21,10 +21,13 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "allowJs": true,
-    "incremental": true,
-    "isolatedModules": true
+    "incremental": true
   },
-  "include": ["src", ".next/types/**/*.ts"],
+  "include": [
+    "src",
+    ".next/types/**/*.ts",
+    "src/types/global.d.ts",
+    "src/types/styled.d.ts"
+  ],
   "exclude": ["node_modules", "**/*.stories.tsx", "dist"]
 }
