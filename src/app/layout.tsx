@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 import localFont from 'next/font/local';
 
 const pretendard = localFont({
-  src: '../../public/assets/fonts/PretendardVariable.woff2',
+  src: '../assets/fonts/PretendardVariable.woff2',
   display: 'swap',
   fallback: [
     '-apple-system',
