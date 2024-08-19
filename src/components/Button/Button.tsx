@@ -1,9 +1,8 @@
-'use client';
-
 import { ButtonExtends, ButtonType } from './ButtonType';
 import { forwardRef } from 'react';
 
 import {
+  ButtonText,
   FilledButton,
   IconButton,
   IconTextButton,
@@ -11,12 +10,13 @@ import {
   OutlinedButton,
   TagButton,
 } from './ButtonStyle';
+import { Loading } from '../Loading/Loading';
 
 export const Button = forwardRef<ButtonExtends, ButtonType>(
   (
     {
       kind = 'filled',
-      $rounded = false,
+      rounded = false,
       color = 'blue',
       children,
       disabled = false,
@@ -33,66 +33,83 @@ export const Button = forwardRef<ButtonExtends, ButtonType>(
     const kinds = {
       filled: (
         <FilledButton
+          kind={'filled'}
           color={color}
-          $rounded={$rounded}
+          rounded={rounded}
           disabled={disabled}
           {...rest}
         >
-          {children}
+          {loading ? (
+            <>
+              <Loading /> {children}
+            </>
+          ) : (
+            <ButtonText>{children}</ButtonText>
+          )}
         </FilledButton>
       ),
       outlined: (
         <OutlinedButton
+          kind={'outlined'}
           color={color}
-          $rounded={$rounded}
+          rounded={rounded}
           disabled={disabled}
           {...rest}
         >
-          {children}
+          {loading ? <Loading /> : children}
         </OutlinedButton>
       ),
       iconText: (
         <IconTextButton
+          kind={'iconText'}
           color={color}
           iconColor={iconColor}
-          $rounded={$rounded}
+          rounded={rounded}
           disabled={disabled}
           iconPosition={iconPosition}
           {...rest}
         >
-          {icon}
-          {children}
+          {loading ? (
+            <Loading />
+          ) : (
+            <>
+              {icon}
+              {children}
+            </>
+          )}
         </IconTextButton>
       ),
       icon: (
         <IconButton
+          kind={'icon'}
           color={color}
-          $rounded={$rounded}
+          rounded={rounded}
           disabled={disabled}
           iconColor={iconColor}
           {...rest}
         >
-          {icon}
+          {loading ? <Loading /> : icon}
         </IconButton>
       ),
       tag: (
         <TagButton
+          kind={'tag'}
           color={color}
-          $rounded={$rounded}
+          rounded={rounded}
           disabled={disabled}
           {...rest}
         >
-          {children}
+          {loading ? <Loading /> : icon}
+
           {/* 삭제를 위한 x 아이콘 추후 추가 예정 */}
         </TagButton>
       ),
       link: (
-        <LinkButton href={href} disabled={disabled} {...rest}>
-          {children}
+        <LinkButton kind={'link'} href={href} disabled={disabled} {...rest}>
+          {loading ? <Loading /> : children}
         </LinkButton>
       ),
     };
-
     return kinds[kind];
   }
 );

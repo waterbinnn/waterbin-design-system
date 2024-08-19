@@ -2,24 +2,37 @@ import styled, { css } from 'styled-components';
 import { color, colorMap, fontMain } from '@/styles';
 import { ButtonType } from './ButtonType';
 
+const isDisabled = (props: ButtonType) => props.disabled || props.loading;
+
+const DisabledStyle = css`
+  background-color: ${color['gray-300']};
+  color: ${color['gray-500']};
+  cursor: not-allowed;
+  pointer-events: none;
+`;
+
 const ButtonCommonStyle = styled.button<ButtonType>`
+  border: none;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  min-width: 60px;
+  user-select: none;
+  border-radius: ${(props) => (props.rounded ? '500px' : '12px')};
+
+  background-color: ${(props) =>
+    isDisabled(props) ? color['gray-300'] : color['transparent']};
+  color: ${(props) => (isDisabled(props) ? color['gray-500'] : color['white'])};
+  cursor: ${(props) => (isDisabled(props) ? 'not-allowed' : 'pointer')};
+  pointer-events: ${(props) => (isDisabled(props) ? 'none' : 'all')};
+`;
+
+const ButtonText = styled.span`
   font-family: ${fontMain};
   font-weight: 500;
-  border: none;
-  background-color: transparent;
-  display: inline-block;
   font-size: 14px;
-  padding: 10px 24px;
-  min-width: 30px;
-  user-select: none;
-  border-radius: ${(props) => (props.$rounded ? '500px' : '12px')};
-  cursor: pointer;
-
-  &:disabled {
-    background-color: ${color['gray-300']};
-    color: ${color['gray-500']};
-    cursor: not-allowed;
-  }
 `;
 
 const FilledButton = styled(ButtonCommonStyle)<ButtonType>`
@@ -107,13 +120,14 @@ const LinkButton = styled.a<ButtonType>`
   text-decoration: underline;
   padding: 8px 10px;
   user-select: none;
-  color: ${({ disabled }) =>
-    disabled ? color['gray-500'] : color['gray-900']};
-  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
-  pointer-events: ${({ disabled }) => (disabled ? 'none' : 'all')};
+
+  color: ${(props) =>
+    isDisabled(props) ? color['gray-500'] : color['gray-900']};
+  cursor: ${(props) => (isDisabled(props) ? 'not-allowed' : 'pointer')};
+  pointer-events: ${(props) => (isDisabled(props) ? 'none' : 'all')};
 
   &:hover {
-    color: ${({ disabled }) => !disabled && color.mint};
+    color: ${(props) => isDisabled(props) && color.mint};
   }
 `;
 
@@ -124,4 +138,5 @@ export {
   IconButton,
   TagButton,
   LinkButton,
+  ButtonText,
 };
