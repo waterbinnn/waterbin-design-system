@@ -32,3 +32,5 @@ export const Loading = () => {
     </CircleLoading>
   );
 };
+
+export default Loading;
