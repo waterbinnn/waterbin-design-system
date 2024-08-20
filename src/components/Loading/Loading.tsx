@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import { ReactComponent as LoadingIcon } from '@/assets/icons/loading.svg';
+import { ReactComponent as LoadingIcon } from '@/assets/icons/loading_s.svg';
 
 const rotate = keyframes` 
 0%{
@@ -16,6 +16,12 @@ const CircleLoading = styled.span`
     transition: transform 0.3s ease-in-out;
     will-change: transform;
     animation: ${rotate} 1s linear infinite;
+    cursor: not-allowed;
+    pointer-events: none;
+
+    path {
+      fill: none;
+    }
   }
 `;
 
