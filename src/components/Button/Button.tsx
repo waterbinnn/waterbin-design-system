@@ -9,6 +9,7 @@ import {
   LinkButton,
   OutlinedButton,
   TagButton,
+  TextButton,
 } from './ButtonStyle';
 import { Loading } from '../Loading/Loading';
 
@@ -26,6 +27,7 @@ export const Button = forwardRef<ButtonExtends, ButtonType>(
       type = 'button',
       iconPosition = 'start',
       iconColor,
+      block = false,
       ...rest
     },
     ref
@@ -37,11 +39,14 @@ export const Button = forwardRef<ButtonExtends, ButtonType>(
           color={color}
           rounded={rounded}
           disabled={disabled}
+          block={block}
+          loading={loading}
           {...rest}
         >
           {loading ? (
             <>
-              <Loading /> {children}
+              <Loading />
+              <ButtonText>{children}</ButtonText>
             </>
           ) : (
             <ButtonText>{children}</ButtonText>
@@ -54,9 +59,18 @@ export const Button = forwardRef<ButtonExtends, ButtonType>(
           color={color}
           rounded={rounded}
           disabled={disabled}
+          loading={loading}
+          block={block}
           {...rest}
         >
-          {loading ? <Loading /> : children}
+          {loading ? (
+            <>
+              <Loading />
+              <ButtonText>{children}</ButtonText>
+            </>
+          ) : (
+            <ButtonText>{children}</ButtonText>
+          )}
         </OutlinedButton>
       ),
       iconText: (
@@ -67,6 +81,8 @@ export const Button = forwardRef<ButtonExtends, ButtonType>(
           rounded={rounded}
           disabled={disabled}
           iconPosition={iconPosition}
+          loading={loading}
+          block={block}
           {...rest}
         >
           {loading ? (
@@ -74,7 +90,7 @@ export const Button = forwardRef<ButtonExtends, ButtonType>(
           ) : (
             <>
               {icon}
-              {children}
+              <ButtonText>{children}</ButtonText>
             </>
           )}
         </IconTextButton>
@@ -85,6 +101,7 @@ export const Button = forwardRef<ButtonExtends, ButtonType>(
           color={color}
           rounded={rounded}
           disabled={disabled}
+          loading={loading}
           iconColor={iconColor}
           {...rest}
         >
@@ -99,15 +116,26 @@ export const Button = forwardRef<ButtonExtends, ButtonType>(
           disabled={disabled}
           {...rest}
         >
-          {loading ? <Loading /> : icon}
-
+          <ButtonText>{children}</ButtonText>
           {/* 삭제를 위한 x 아이콘 추후 추가 예정 */}
         </TagButton>
       ),
       link: (
-        <LinkButton kind={'link'} href={href} disabled={disabled} {...rest}>
-          {loading ? <Loading /> : children}
+        <LinkButton
+          loading={loading}
+          kind={'link'}
+          href={href}
+          disabled={disabled}
+          color={color}
+          {...rest}
+        >
+          {loading ? <Loading /> : <ButtonText>{children}</ButtonText>}
         </LinkButton>
+      ),
+      text: (
+        <TextButton color={color} kind={'text'} disabled={disabled} {...rest}>
+          {children}
+        </TextButton>
       ),
     };
     return kinds[kind];

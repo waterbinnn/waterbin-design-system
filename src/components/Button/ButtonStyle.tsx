@@ -1,14 +1,61 @@
 import styled, { css } from 'styled-components';
-import { color, colorMap, fontMain } from '@/styles';
+import { colors, colorMap, fontMain } from '@/styles';
 import { ButtonType } from './ButtonType';
 
-const isDisabled = (props: ButtonType) => props.disabled || props.loading;
+const isDisabled = (props: ButtonType) => props.disabled;
+const isLoading = (props: ButtonType) => props.loading;
+const isTransparent = (props: ButtonType) => props.color === 'transparent';
+
+/* 공통 색상 로직을 처리위함 */
+const setTextColor = (props: ButtonType, whiteColor: string) => {
+  if (isTransparent(props)) {
+    return props.iconColor ? colorMap[props.iconColor] : colors['gray-900'];
+  } else if (props.color === 'white') {
+    return whiteColor;
+  } else {
+    return colors.white;
+  }
+};
+
+const TransparentStyle = css<ButtonType>`
+  background-color: ${(props) =>
+    isTransparent(props) ? 'transparent' : colorMap[props.color!]};
+  border: 1px solid ${(props) => setTextColor(props, colors.blue)};
+  color: ${(props) => setTextColor(props, colors.blue)};
+
+  &:hover {
+    background-color: ${(props) => isTransparent(props) && colors['gray-200']};
+  }
+
+  ${(props) =>
+    isLoading(props) &&
+    css`
+      svg {
+        g {
+          path {
+            stroke: ${colors['gray-900']};
+          }
+        }
+      }
+    `};
+
+  ${(props) => isDisabled(props) && DisabledStyle};
+`;
 
 const DisabledStyle = css`
-  background-color: ${color['gray-300']};
-  color: ${color['gray-500']};
+  background-color: ${colors['gray-300']};
+  color: ${colors['gray-500']};
   cursor: not-allowed;
   pointer-events: none;
+  border: none;
+
+  svg {
+    g {
+      path {
+        stroke: ${colors['gray-500']};
+      }
+    }
+  }
 `;
 
 const ButtonCommonStyle = styled.button<ButtonType>`
@@ -17,16 +64,18 @@ const ButtonCommonStyle = styled.button<ButtonType>`
   justify-content: center;
   align-items: center;
   gap: 8px;
-  padding: 10px 24px;
+  padding: 10px 16px;
   min-width: 60px;
-  user-select: none;
+  min-height: 42px;
   border-radius: ${(props) => (props.rounded ? '500px' : '12px')};
+  user-select: none;
+  cursor: pointer;
 
-  background-color: ${(props) =>
-    isDisabled(props) ? color['gray-300'] : color['transparent']};
-  color: ${(props) => (isDisabled(props) ? color['gray-500'] : color['white'])};
-  cursor: ${(props) => (isDisabled(props) ? 'not-allowed' : 'pointer')};
-  pointer-events: ${(props) => (isDisabled(props) ? 'none' : 'all')};
+  ${(props) =>
+    props.block &&
+    css`
+      width: 100%;
+    `}
 `;
 
 const ButtonText = styled.span`
@@ -37,57 +86,83 @@ const ButtonText = styled.span`
 
 const FilledButton = styled(ButtonCommonStyle)<ButtonType>`
   background-color: ${(props) =>
-    props.color ? colorMap[props.color] : color.blue};
-  color: ${(props) => (props.color !== 'white' ? color.white : color.blue)};
+    props.color ? colorMap[props.color] : colors.blue};
+  color: ${(props) => (props.color !== 'white' ? colors.white : colors.blue)};
 
   &:hover {
-    opacity: 0.88;
+    ${(props) =>
+      !isLoading(props) &&
+      css`
+        opacity: 0.88;
+      `}
   }
+
+  ${TransparentStyle}
+  ${(props) => isDisabled(props) && DisabledStyle};
+  ${(props) =>
+    isLoading(props) &&
+    css`
+      cursor: not-allowed;
+      pointer-events: none;
+
+      svg {
+        g {
+          path {
+            stroke: ${props.color === 'transparent'
+              ? colors['gray-900']
+              : props.color === 'white'
+                ? colors.blue
+                : colors.white};
+          }
+        }
+      }
+    `}
 `;
 
 const OutlinedButton = styled(ButtonCommonStyle)<ButtonType>`
   background-color: transparent;
-  color: ${(props) => (props.color ? colorMap[props.color] : color.black)};
+  color: ${(props) =>
+    props.color && props.color !== 'transparent'
+      ? colorMap[props.color]
+      : colors.blue};
   border: 1px solid
-    ${(props) => (props.color ? colorMap[props.color] : color.black)};
+    ${(props) =>
+      props.color && props.color !== 'transparent'
+        ? colorMap[props.color]
+        : colors.blue};
+
+  ${(props) => isTransparent(props) && TransparentStyle};
+  ${(props) => isDisabled(props) && DisabledStyle};
+  ${(props) =>
+    isLoading(props) &&
+    css`
+      cursor: not-allowed;
+      pointer-events: none;
+
+      svg {
+        g {
+          path {
+            stroke: ${props.color !== 'transparent'
+              ? colorMap[props.color!]
+              : colors['gray-900']};
+          }
+        }
+      }
+    `};
 
   &:hover {
-    background-color: ${color['gray-200']};
-  }
-`;
-
-/* 배경이 투명색 일 때 스타일 정의위함 */
-const isTransparent = (props: ButtonType) => props.color === 'transparent';
-
-/* 공통 색상 로직을 처리위함 */
-const setTextColor = (props: ButtonType, whiteColor: string) => {
-  if (isTransparent(props)) {
-    return props.iconColor ? colorMap[props.iconColor] : color['gray-900'];
-  } else if (props.color === 'white') {
-    return whiteColor;
-  } else {
-    return color.white;
-  }
-};
-
-const TransparentStyle = css<ButtonType>`
-  background-color: ${(props) =>
-    isTransparent(props) ? 'transparent' : colorMap[props.color!]};
-  border: 1px solid ${(props) => setTextColor(props, color.blue)};
-
-  color: ${(props) => setTextColor(props, color.blue)};
-
-  svg > path {
-    fill: ${(props) => setTextColor(props, color.blue)};
-  }
-
-  &:hover {
-    background-color: ${(props) => isTransparent(props) && color['gray-200']};
+    ${(props) =>
+      !isLoading(props) &&
+      css`
+        background-color: ${colors['gray-200']};
+        color: ${props.color === 'white'
+          ? colors.blue
+          : colorMap[props.color!]};
+      `}
   }
 `;
 
 const IconTextButton = styled(FilledButton)<ButtonType>`
-  ${TransparentStyle}
   padding: 10px 16px 10px 12px;
   display: flex;
   align-items: center;
@@ -96,22 +171,60 @@ const IconTextButton = styled(FilledButton)<ButtonType>`
     iconPosition === 'start' ? 'row' : 'row-reverse'};
   padding: ${({ iconPosition }) =>
     iconPosition === 'start' ? '10px 16px 10px 12px' : '10px 12px 10px 16px'};
+
+  ${(props) =>
+    isDisabled(props) && {
+      DisabledStyle,
+    }};
 `;
 
 const IconButton = styled(FilledButton)<ButtonType>`
   ${TransparentStyle}
+
   padding: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
-  svg > path {
-    fill: ${(props) => setTextColor(props, color['gray-900'])};
-  }
+  min-width: 36px;
+  min-height: 36px;
   border: none;
+  svg > path {
+    fill: ${(props) => setTextColor(props, colors['gray-900'])};
+  }
+
+  ${(props) =>
+    isDisabled(props) &&
+    css`
+      background-color: ${colors['gray-300']};
+      cursor: not-allowed;
+      pointer-events: none;
+    `};
+
+  ${(props) =>
+    isLoading(props) &&
+    css`
+      cursor: not-allowed;
+      pointer-events: none;
+
+      svg {
+        g {
+          path {
+            stroke: ${colors['gray-200']};
+          }
+        }
+      }
+    `};
 `;
 
 const TagButton = styled(FilledButton)<ButtonType>`
-  padding: 8px 10px;
+  padding: 6px 6px;
+  min-height: 24px;
+  min-width: 22px;
+  border-radius: 8px;
+
+  span {
+    font-size: 12px;
+  }
 `;
 
 const LinkButton = styled.a<ButtonType>`
@@ -120,14 +233,63 @@ const LinkButton = styled.a<ButtonType>`
   text-decoration: underline;
   padding: 8px 10px;
   user-select: none;
-
+  cursor: pointer;
   color: ${(props) =>
-    isDisabled(props) ? color['gray-500'] : color['gray-900']};
-  cursor: ${(props) => (isDisabled(props) ? 'not-allowed' : 'pointer')};
-  pointer-events: ${(props) => (isDisabled(props) ? 'none' : 'all')};
+    props.color && props.color !== 'transparent'
+      ? colorMap[props.color]
+      : colors.blue};
+
+  ${(props) =>
+    isDisabled(props) &&
+    css`
+      color: ${colors['gray-500']};
+      cursor: not-allowed;
+      pointer-events: none;
+    `};
 
   &:hover {
-    color: ${(props) => isDisabled(props) && color.mint};
+    opacity: ${(props) => !isDisabled(props) && 0.88};
+  }
+
+  ${(props) =>
+    isLoading(props) &&
+    css`
+      cursor: not-allowed;
+      pointer-events: none;
+
+      svg {
+        g {
+          path {
+            stroke: ${props.color && props.color !== 'transparent'
+              ? colorMap[props.color]
+              : colors.blue};
+          }
+        }
+      }
+    `};
+`;
+
+const TextButton = styled.button<ButtonType>`
+  font-family: ${fontMain};
+  font-weight: 500;
+  font-size: 14px;
+  color: ${(props) => (props.color ? colorMap[props.color] : colors.blue)};
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  display: inline-flex;
+  padding: 6px;
+
+  ${(props) =>
+    isDisabled(props) &&
+    css`
+      color: ${colors['gray-500']};
+      cursor: not-allowed;
+      pointer-events: none;
+    `};
+
+  &:hover {
+    opacity: ${(props) => !isDisabled(props) && 0.88};
   }
 `;
 
@@ -139,4 +301,5 @@ export {
   TagButton,
   LinkButton,
   ButtonText,
+  TextButton,
 };

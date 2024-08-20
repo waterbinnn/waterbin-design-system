@@ -10,7 +10,7 @@ type ButtonExtends = ButtonHTMLAttributes<HTMLButtonElement> &
 
 interface ButtonType extends ButtonExtends {
   size?: 'small' | 'medium' | 'large';
-  kind: 'filled' | 'outlined' | 'link' | 'icon' | 'iconText' | 'tag';
+  kind: 'filled' | 'outlined' | 'link' | 'icon' | 'iconText' | 'tag' | 'text';
   color?: Color;
   disabled?: boolean;
   loading?: boolean;
@@ -20,7 +20,7 @@ interface ButtonType extends ButtonExtends {
   icon?: React.ReactNode;
   iconPosition?: 'start' | 'end';
   iconColor?: Color;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export type { ButtonExtends, ButtonType };
