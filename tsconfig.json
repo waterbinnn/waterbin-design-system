@@ -29,5 +29,5 @@
     "src/types/global.d.ts",
     "src/types/styled.d.ts"
   ],
-  "exclude": ["node_modules", "**/*.stories.tsx", "dist"]
+  "exclude": ["node_modules", "dist"]
 }
