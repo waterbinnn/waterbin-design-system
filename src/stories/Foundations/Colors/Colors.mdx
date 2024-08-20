@@ -1,23 +1,48 @@
 import { Meta, ColorPalette, ColorItem } from '@storybook/blocks';
+import { colors } from '@/styles/constants/colors';
 
-<Meta title="Foundations/Colors" />
+<Meta title='Foundations/Colors' />
 
 <ColorPalette>
   <ColorItem
-    title="theme.color.greyscale"
-    subtitle="Some of the greys"
-    colors={{ White: '#FFFFFF', Alabaster: '#F8F8F8', Concrete: '#F3F3F3' }}
-  />
-  <ColorItem title="theme.color.primary" subtitle="Coral" colors={{ WildWatermelon: '#FF4785' }} />
-  <ColorItem title="theme.color.secondary" subtitle="Ocean" colors={{ DodgerBlue: '#1EA7FD' }} />
-  <ColorItem
-    title="theme.color.positive"
-    subtitle="Green"
+    title='theme.color.greyscale'
+    subtitle='Greyscale Palette'
     colors={{
-      Apple: 'rgba(102,191,60,1)',
-      Apple80: 'rgba(102,191,60,.8)',
-      Apple60: 'rgba(102,191,60,.6)',
-      Apple30: 'rgba(102,191,60,.3)',
+      'Gray 200': colors['gray-200'],
+      'Gray 300': colors['gray-300'],
+      'Gray 400': colors['gray-400'],
+      'Gray 500': colors['gray-500'],
+      'Gray 600': colors['gray-600'],
+      'Gray 700': colors['gray-700'],
+      'Gray 800': colors['gray-800'],
+      'Gray 900': colors['gray-900'],
+    }}
+  />
+  <ColorItem
+    title='theme.color.primary'
+    subtitle='Primary Colors'
+    colors={{
+      Red: colors.red,
+      Orange: colors.orange,
+      Yellow: colors.yellow,
+      Green: colors.green,
+      Mint: colors.mint,
+      Teal: colors.teal,
+      Cyan: colors.cyan,
+      Blue: colors.blue,
+      Indigo: colors.indigo,
+      Purple: colors.purple,
+      Pink: colors.pink,
+      Brown: colors.brown,
+    }}
+  />
+  <ColorItem
+    title='theme.color.basic'
+    subtitle='Basic Colors'
+    colors={{
+      Black: colors.black,
+      White: colors.white,
+      Transparent: colors.transparent,
     }}
   />
 </ColorPalette>
