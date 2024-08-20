@@ -1,3 +1,4 @@
+import path from 'path';
 import { StorybookConfig } from '@storybook/nextjs';
 
 const config: StorybookConfig = {
@@ -11,7 +12,9 @@ const config: StorybookConfig = {
   ],
   framework: {
     name: '@storybook/nextjs',
-    options: {},
+    options: {
+      nextConfigPath: path.resolve(__dirname, '../next.config.js'),
+    },
   },
   staticDirs: ['../public'],
   webpack: (config) => {
