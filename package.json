@@ -1,11 +1,12 @@
 {
   "name": "@waterbin/design-system",
   "description": "waterbin's design system",
-  "version": "0.2.12",
+  "version": "0.2.13",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/types/index.d.ts",
+  "type": "module",
   "files": [
     "/dist"
   ],
@@ -61,7 +62,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
     "eslint-plugin-storybook": "^0.8.0",
-    "rollup": "^2.0.0",
+    "rollup": "^4.20.0",
     "storybook": "^8.2.9",
     "typescript": "^5"
   }
