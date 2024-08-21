@@ -1,7 +1,7 @@
 {
   "name": "@waterbin/design-system",
   "description": "waterbin's design system",
-  "version": "0.2.14",
+  "version": "0.2.15",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -12,7 +12,9 @@
   ],
   "scripts": {
     "dev": "next dev",
-    "build": "tsc --emitDeclarationOnly && rollup -c",
+    "build": "yarn build:tsc && yarn build:rollup",
+    "build:tsc": "yarn tsc --emitDeclarationOnly",
+    "build:rollup": "yarn rollup -c",
     "start": "next start",
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
