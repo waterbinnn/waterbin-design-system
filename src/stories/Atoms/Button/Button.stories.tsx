@@ -1,7 +1,7 @@
 import Button from '@/components/Button/Button';
 import type { Meta, StoryObj } from '@storybook/react';
 import { ReactComponent as IconDownload } from '@/assets/icons/download.svg';
-import { ButtonType } from '@/components/Button/ButtonType';
+import { ButtonType } from '@/components/Button';
 import { colorName } from '@/styles';
 
 const buttonKinds = [

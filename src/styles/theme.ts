@@ -1,8 +1,8 @@
 import { DefaultTheme } from 'styled-components';
-import { color, fontFamily, fontMain, fontPrice } from './constants';
+import { colors, fontFamily, fontMain, fontPrice } from './constants';
 
 const theme: DefaultTheme = {
-  color,
+  colors,
   fontFamily,
   fontMain,
   fontPrice,

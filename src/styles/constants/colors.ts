@@ -1,6 +1,6 @@
-import { Color } from '@/types/Color';
+import { Color, ColorsArr } from '../../../types/Color';
 
-const colors = {
+const colors: ColorsArr = {
   black: '#000000',
   white: '#ffffff',
   'gray-200': '#f5f5f5',

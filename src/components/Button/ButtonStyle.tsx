@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { colors, colorMap, fontMain } from '@/styles';
-import { ButtonType } from './ButtonType';
+import { ButtonType } from './Button.type';
 
 const isDisabled = (props: ButtonType) => props.disabled;
 const isLoading = (props: ButtonType) => props.loading;

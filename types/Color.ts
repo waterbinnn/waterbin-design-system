@@ -23,4 +23,6 @@ type Color =
   | 'brown'
   | 'transparent';
 
-export type { Color };
+type ColorsArr = Record<Color, string>;
+
+export type { Color, ColorsArr };

@@ -1,4 +1,4 @@
-import { ButtonExtends, ButtonType } from './ButtonType';
+import { ButtonExtends, ButtonType } from './Button.type';
 import { forwardRef } from 'react';
 
 import {
