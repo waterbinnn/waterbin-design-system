@@ -3,7 +3,6 @@
   "description": "waterbin's design system",
   "version": "0.2.16",
   "license": "MIT",
-  "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/types/index.d.ts",
   "type": "module",

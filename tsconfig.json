@@ -12,7 +12,7 @@
     "resolveJsonModule": true,
     "jsx": "preserve",
     "declaration": true,
-    "declarationDir": "dist/types",
+    "declarationDir": "./dist/types",
     "plugins": [
       {
         "name": "next"
@@ -23,11 +23,6 @@
     },
     "incremental": true
   },
-  "include": [
-    "src",
-    ".next/types/**/*.ts",
-    "src/types/global.d.ts",
-    "src/types/styled.d.ts"
-  ],
+  "include": ["src", "types/global.d.ts", "types/styled.d.ts"],
   "exclude": ["node_modules", "dist"]
 }
