@@ -1,6 +1,10 @@
 # @waterbin/design-system
 
-> 개인 프로젝트 용으로 만든 디자인 시스템입니다. <br/>
+❎ deprecated
+</br>
+https://github.com/waterbinnn/waterbin-ui-kit 로 이전 
+
+> 개인 프로젝트 용으로 만든 디자인 시스템입니다. 지금은 사용하지 않습니다. <br/>
 > npm 패키지
 > [@waterbin/design-system](https://www.npmjs.com/package/@waterbin/design-system?activeTab=readme)
 
@@ -14,7 +18,3 @@
 - Storybook
 ```
 
-**개발 현재 진행형**
-
-- npm 배포 완료
-- 버튼 컴포넌트 개발 중
